@@ -46,14 +46,23 @@ function Paciente(nombre, edad, rut, diagnostico) {
   });
 }
 
-Consultorio.prototype.buscar_Paciente = function () {
+Consultorio.prototype.buscar_Paciente = function (nombre_Paciente_busqueda) {
   let indice = -1;
 
-  for (i = 0; i < this.paciente.length; i++) {}
-};
+  for (i = 0; i < this.pacientes.length; i++) {
+    if (this.pacientes[i].nombre == nombre_Paciente_busqueda) {
+      indice = i;
+    }
+  }
 
-Consultorio.prototype.todos_los_pacientes = function () {
-  console.log(todos_los_pacientes);
+  if (indice >= 0) {
+    console.log(
+      "PACIENTE ENCONTRADO, sus datos son:",
+      this.pacientes[indice].nombre
+    );
+  } else {
+    console.log("PACIENTE NO ENCONTRADO");
+  }
 };
 
 const primerPaciente = new Paciente(
@@ -67,15 +76,21 @@ const segundoPaciente = new Paciente(
   "Armando Mendoza",
   "30",
   "11.222.333-4",
-  "covid"
+  "Covid"
 );
 
 console.log(primerPaciente);
 console.log(segundoPaciente);
 
-const todos_los_pacientes = new Consultorio(
+Consultorio.prototype.todos_los_pacientes = function () {
+  console.log(this.pacientes);
+};
+
+const ConsultorioMadreTeresDeCalcuta = new Consultorio(
   "Consultorio madre teresa de calcuta",
   [primerPaciente, segundoPaciente]
 );
 
-console.log(todos_los_pacientes);
+ConsultorioMadreTeresDeCalcuta.todos_los_pacientes();
+ConsultorioMadreTeresDeCalcuta.buscar_Paciente("Beatriz Pinzon Solano");
+ConsultorioMadreTeresDeCalcuta.buscar_Paciente("Armando Mendoza");
